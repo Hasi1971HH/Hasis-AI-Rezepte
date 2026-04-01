@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rezept Transcripts — Anleitung</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      max-width: 740px;
+      margin: 60px auto;
+      padding: 0 2rem;
+      color: #222;
+      line-height: 1.7;
+    }
+
+    h1 { font-size: 1.8rem; margin-bottom: 0.25rem; color: #cc0000; }
+    .subtitle { color: #666; margin-bottom: 2.5rem; font-size: 0.95rem; }
+
+    h2 {
+      font-size: 1.05rem;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+      background: #f5f5f5;
+      padding: 0.4rem 0.75rem;
+      border-left: 4px solid #cc0000;
+      border-radius: 0 4px 4px 0;
+    }
+
+    p { margin: 0.5rem 0; }
+
+    code {
+      background: #f0f0f0;
+      border-radius: 4px;
+      font-family: "SF Mono", Menlo, Monaco, monospace;
+      font-size: 0.9rem;
+      padding: 0.15rem 0.45rem;
+    }
+
+    .step-block {
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin: 0.75rem 0;
+    }
+    .step-block code {
+      display: block;
+      font-size: 1rem;
+      margin-top: 0.4rem;
+      color: #cc0000;
+      background: none;
+      padding: 0;
+    }
+
+    .hint { font-size: 0.85rem; color: #888; margin-top: 0.4rem; }
+
+    .box-green {
+      background: #f0fff4;
+      border: 1px solid #68d391;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+    .box-green strong { color: #276749; }
+
+    .box-yellow {
+      background: #fff8e1;
+      border: 1px solid #f0c040;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+    .box-yellow strong { color: #996600; }
+
+    .box-blue {
+      background: #ebf8ff;
+      border: 1px solid #63b3ed;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+    .box-blue strong { color: #2b6cb0; }
+
+    .badge {
+      display: inline-block;
+      background: #cc0000;
+      color: white;
+      font-size: 0.72rem;
+      padding: 0.1rem 0.5rem;
+      border-radius: 999px;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+    .badge-blue {
+      background: #3182ce;
+    }
+
+    hr { border: none; border-top: 1px solid #e0e0e0; margin: 2.5rem 0; }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: bold;
+      letter-spacing: 0.08em;
+      color: #aaa;
+      text-transform: uppercase;
+      margin-top: 2.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .audience-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: #1d1d1f;
+      color: white;
+      padding: 0.7rem 1.1rem;
+      border-radius: 8px;
+      margin: 2rem 0 0.5rem 0;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    .audience-header span { font-size: 1.4rem; }
+
+    footer { font-size: 0.8rem; color: #aaa; margin-top: 3rem; }
+
+    @media print { body { margin: 20px auto; } }
+  </style>
+</head>
+<body>
+
+  <h1>Rezept Transcripts</h1>
+  <p class="subtitle">YouTube-Transcripts als Textdatei — selbst-enthaltene Mac App</p>
+
+  <div class="box-green">
+    <strong>So funktioniert die Verteilung:</strong><br>
+    Du baust die App <strong>einmal</strong> auf deinem Mac (Schritt 1–4 unten).<br>
+    Deine Frau bekommt eine <strong>ZIP-Datei</strong> — kein Python, kein Terminal, nichts weiter.
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FÜR DICH (Entwickler) — einmalig
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="audience-header">
+    <span>🧑‍💻</span> Für dich — einmalige Vorbereitung
+    <span class="badge">nur 1×</span>
+  </div>
+
+  <h2>Schritt 1 &mdash; Python installieren (falls noch nicht vorhanden)</h2>
+  <div class="step-block">
+    Im Browser <strong>python.org/downloads</strong> aufrufen<br>
+    &rarr; Gelben Button klicken &rarr; <code>.pkg</code>-Datei öffnen &rarr; Installer durchklicken.
+  </div>
+
+  <h2>Schritt 2 &mdash; Projektdateien herunterladen</h2>
+  <div class="step-block">
+    Auf der GitHub-Seite oben rechts auf <strong>„Code"</strong> klicken<br>
+    &rarr; <strong>„Download ZIP"</strong> wählen &rarr; ZIP entpacken (Doppelklick).
+  </div>
+
+  <h2>Schritt 3 &mdash; Terminal öffnen und in den Projektordner navigieren</h2>
+  <div class="step-block">
+    <strong>⌘ + Leertaste</strong> → <code>Terminal</code> → Enter<br><br>
+    Dann <code>cd </code> eintippen (mit Leerzeichen), den Ordner <strong>aus dem Finder ins Terminal ziehen</strong>, Enter.
+    <p class="hint">Der Ordner heißt wahrscheinlich „HasisKocht".</p>
+  </div>
+
+  <h2>Schritt 4 &mdash; App bauen und ZIP erstellen</h2>
+  <div class="step-block">
+    Diesen Befehl eintippen und Enter drücken:
+    <code>bash build_app.sh</code>
+    Das Skript installiert alles Nötige und erstellt automatisch die Datei:
+    <code>dist/Rezept_Transcripts.zip</code>
+    <p class="hint">Dauert ca. 2–3 Minuten. Danach ist Terminal erledigt — für immer.</p>
+  </div>
+
+  <h2>Schritt 5 &mdash; ZIP an deine Frau schicken</h2>
+  <div class="step-block">
+    Die Datei <strong>dist/Rezept_Transcripts.zip</strong> per AirDrop, iCloud, E-Mail oder USB-Stick schicken.<br>
+    Fertig — du musst das nie wieder machen (außer nach Updates).
+  </div>
+
+  <hr>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FÜR DEINE FRAU — Einrichtung (einmalig)
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="audience-header">
+    <span>👩</span> Für deine Frau — einmalige Einrichtung
+    <span class="badge badge-blue">nur 1×</span>
+  </div>
+
+  <h2>Schritt 1 &mdash; ZIP entpacken</h2>
+  <div class="step-block">
+    Doppelklick auf <strong>Rezept_Transcripts.zip</strong><br>
+    &rarr; Es erscheint <strong>„Rezept Transcripts.app"</strong> daneben.
+  </div>
+
+  <h2>Schritt 2 &mdash; App in den Programme-Ordner ziehen</h2>
+  <div class="step-block">
+    <strong>„Rezept Transcripts.app"</strong> per Drag &amp; Drop in den <strong>Programme-Ordner</strong> ziehen.<br>
+    <p class="hint">Finder → linke Leiste → „Programme"</p>
+  </div>
+
+  <div class="box-yellow">
+    <strong>Beim allerersten Start:</strong> macOS zeigt „App von unbekanntem Entwickler".<br>
+    &rarr; <strong>Rechtsklick</strong> auf die App → <strong>„Öffnen"</strong> → nochmals <strong>„Öffnen"</strong> bestätigen.<br>
+    Das ist einmalig und völlig harmlos.
+  </div>
+
+  <hr>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       TÄGLICHE NUTZUNG
+       ═══════════════════════════════════════════════════════════ -->
+  <div class="audience-header">
+    <span>▶️</span> Täglich — so wird ein Transcript heruntergeladen
+  </div>
+
+  <div class="step-block">
+    1. <strong>„Rezept Transcripts"</strong> im Programme-Ordner doppelklicken<br>
+    2. YouTube-Link kopieren (<strong>⌘ C</strong>)<br>
+    3. Im App-Fenster auf <strong>„Einfügen"</strong> klicken<br>
+    4. <strong>„Transcript herunterladen"</strong> klicken<br>
+    5. Die Textdatei wird gespeichert und der Ordner öffnet sich automatisch im Finder
+  </div>
+
+  <div class="box-green">
+    <strong>Wo landen die Dateien?</strong><br>
+    Automatisch in <strong>Dokumente → Rezept-Transcripts</strong> — der Finder öffnet diesen Ordner nach jedem Download von selbst.
+  </div>
+
+  <footer>Erstellt für den privaten Gebrauch &mdash; Rezept Transcripts</footer>
+
+</body>
+</html>
