@@ -23,9 +23,7 @@ Einfach eine YouTube-URL eingeben. Die App lädt das Transkript, schickt es an e
 
 | Zutaten | Zubereitung |
 |---|---|
-| *<img width="1446" height="1501" alt="Zutaten" src="https://github.com/user-attachments/assets/97c97ddd-f3b7-4103-b13a-b7871ad38607" />
-* | <img width="1410" height="1745" alt="Zubereitung" src="https://github.com/user-attachments/assets/b61bcdd1-a174-4d54-bf02-7afd86f41874" />
-** |
+|<img width="1446" height="1501" alt="Zutaten" src="https://github.com/user-attachments/assets/97c97ddd-f3b7-4103-b13a-b7871ad38607" />|<img width="1410" height="1745" alt="Zubereitung" src="https://github.com/user-attachments/assets/b61bcdd1-a174-4d54-bf02-7afd86f41874" />|
 
 ---
 
