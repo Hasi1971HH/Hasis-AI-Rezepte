@@ -1,5 +1,5 @@
 """
-HasisKocht — Native macOS App
+Hasis AI Rezepte — Native macOS App
 YouTube-URL eingeben → Transcript laden → Groq extrahiert JSON → Python baut HTML-Rezept → Browser öffnet sich.
 """
 import json
@@ -25,7 +25,7 @@ from youtube_transcript_api import (
 PREFERRED_LANGUAGES = ["de", "en", "fr", "es", "it"]
 TRANSCRIPTS_DIR = Path.home() / "Documents" / "Rezept-Transcripts"
 TRANSCRIPTS_DIR.mkdir(parents=True, exist_ok=True)
-CONFIG_FILE = Path.home() / ".hasiskocht_config"
+CONFIG_FILE = Path.home() / ".hasisairezepte_config"
 
 # ── Groq-Prompt: nur JSON extrahieren (wenige Tokens) ─────────────────────────
 JSON_PROMPT = """Du extrahierst Rezeptdaten aus einem YouTube-Transkript und gibst NUR valides JSON zurück.
@@ -51,17 +51,13 @@ Pflichtfelder:
       "beschreibung": "Ausführliche Anleitung mit Zeiten, Temperaturen und Tipps aus dem Video."
     }
   ],
-  "naehrwerte_pro_portion": {
-    "kalorien": 400,
-    "kohlenhydrate_g": 45,
-    "davon_zucker_g": 5,
-    "eiweiss_g": 20,
-    "fett_g": 12,
-    "ballaststoffe_g": 4
-  },
   "naehrwerte_pro_100g": {
     "kalorien": 130,
-    "kohlenhydrate_g": 15
+    "kohlenhydrate_g": 15,
+    "davon_zucker_g": 3,
+    "eiweiss_g": 8,
+    "fett_g": 5,
+    "ballaststoffe_g": 2
   },
   "video_id": "YouTubeVideoID"
 }
@@ -130,6 +126,11 @@ def build_html(data: dict) -> str:
     titel        = data.get("titel", "Rezept")
     kurz         = data.get("kurzbeschreibung", "")
     portionen    = int(data.get("portionen_basis", 4))
+    header_img_url  = fetch_wikimedia_image(titel)
+    header_img_html = (
+        f'<img src="{header_img_url}" class="header-img" alt="{titel}">'
+        if header_img_url else ""
+    )
     video_id     = data.get("video_id", "")
     zutaten      = data.get("zutaten", [])
     zubereitung  = data.get("zubereitung", [])
@@ -173,10 +174,9 @@ def build_html(data: dict) -> str:
     gruppen_html = "\n".join(gruppen_html_parts)
 
     def nw_row(label, key, unit, highlight=False):
-        val = nw_portion.get(key, "–")
         v100 = nw_100g.get(key, "–")
         cls = ' class="kh-row"' if highlight else ""
-        return f'<tr{cls}><td>{label}</td><td><b>{val} {unit}</b></td><td>{v100} {unit}</td></tr>'
+        return f'<tr{cls}><td>{label}</td><td><b>{v100} {unit}</b></td></tr>'
 
     nw_rows = (
         nw_row("Kalorien", "kalorien", "kcal") +
@@ -213,7 +213,9 @@ def build_html(data: dict) -> str:
   .card {{ max-width: 680px; margin: 40px auto; background: #fff;
            border-radius: 18px; box-shadow: 0 4px 24px rgba(0,0,0,.08);
            overflow: hidden; }}
-  .header {{ background: #fff; padding: 32px 32px 0; }}
+  .header {{ background: #fff; padding: 0 0 0; }}
+  .header-img {{ width: 100%; max-height: 220px; object-fit: cover; display: block; }}
+  .header-text {{ padding: 24px 32px 0; }}
   h1 {{ font-size: 28px; font-weight: 700; letter-spacing: -.5px; }}
   .kurz {{ color: #6e6e73; margin-top: 6px; font-size: 15px; }}
   .slider-box {{ padding: 20px 32px; background: #f5f5f7;
@@ -287,8 +289,11 @@ def build_html(data: dict) -> str:
 <body>
 <div class="card">
   <div class="header">
-    <h1>{titel}</h1>
-    <p class="kurz">{kurz}</p>
+    {header_img_html}
+    <div class="header-text">
+      <h1>{titel}</h1>
+      <p class="kurz">{kurz}</p>
+    </div>
   </div>
 
   <div class="slider-box">
@@ -317,7 +322,6 @@ def build_html(data: dict) -> str:
     <table class="nw-table">
       <thead><tr>
         <th>Nährwert</th>
-        <th>Pro Portion</th>
         <th>Pro 100 g</th>
       </tr></thead>
       <tbody>{nw_rows}</tbody>
@@ -393,6 +397,30 @@ def slugify(title: str) -> str:
     return re.sub(r'\s+', '_', title.strip())[:80]
 
 
+def fetch_wikimedia_image(titel: str) -> str:
+    """Sucht ein passendes Bild auf Wikimedia Commons. Gibt URL oder '' zurück."""
+    import urllib.parse
+    query = urllib.parse.quote(titel + " food dish")
+    url = (
+        "https://commons.wikimedia.org/w/api.php"
+        f"?action=query&generator=search&gsrnamespace=6"
+        f"&gsrsearch={query}&prop=imageinfo&iiprop=url"
+        f"&format=json&gsrlimit=8"
+    )
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "HasisAIRezepte/1.0"})
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            data = json.loads(resp.read())
+        pages = data.get("query", {}).get("pages", {})
+        for page in pages.values():
+            img_url = page.get("imageinfo", [{}])[0].get("url", "")
+            if img_url and any(img_url.lower().endswith(e) for e in (".jpg", ".jpeg", ".png")):
+                return img_url
+    except Exception:
+        pass
+    return ""
+
+
 def fetch_transcript(video_id: str) -> tuple[str, str]:
     api = YouTubeTranscriptApi()
     transcript_list = api.list(video_id)
@@ -461,7 +489,7 @@ class ApiKeyDialog(tk.Toplevel):
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title("HasisKocht")
+        self.title("Hasis AI Rezepte")
         self.resizable(False, False)
         self.configure(bg=BG)
         w, h = 520, 420
@@ -486,7 +514,7 @@ class App(tk.Tk):
 
         header = tk.Frame(self, bg=BG)
         header.pack(fill="x", padx=28, pady=(32,2))
-        tk.Label(header, text="HasisKocht", font=self._f_title, bg=BG, fg=FG).pack(side="left")
+        tk.Label(header, text="Hasis AI Rezepte", font=self._f_title, bg=BG, fg=FG).pack(side="left")
         sl = tk.Label(header, text="⚙", font=tkfont.Font(size=18), bg=BG, fg=MUTED, cursor="hand2")
         sl.pack(side="right")
         sl.bind("<Button-1>", lambda _: self._show_key_dialog())
