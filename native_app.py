@@ -63,7 +63,8 @@ Pflichtfelder:
 }
 
 Alle Mengenangaben zwingend metrisch (g, ml, kg, l). Niemals oz, cup, pound.
-Zubereitung so detailliert wie möglich — alle Hinweise, Zeiten und Tipps aus dem Video einfließen lassen."""
+Zubereitung so detailliert wie möglich — alle Hinweise, Zeiten und Tipps aus dem Video einfließen lassen.
+Nährwerte pro 100g: Falls nicht im Video genannt, schätze realistische Werte basierend auf dem Gericht. Niemals 0 zurückgeben."""
 
 
 # ── Farben & Stil ──────────────────────────────────────────────────────────────
@@ -126,11 +127,7 @@ def build_html(data: dict) -> str:
     titel        = data.get("titel", "Rezept")
     kurz         = data.get("kurzbeschreibung", "")
     portionen    = int(data.get("portionen_basis", 4))
-    header_img_url  = fetch_wikimedia_image(titel)
-    header_img_html = (
-        f'<img src="{header_img_url}" class="header-img" alt="{titel}">'
-        if header_img_url else ""
-    )
+    header_img_html = '<img src="https://images.pexels.com/photos/6822591/pexels-photo-6822591.jpeg" class="header-img" alt="Rezept">'
     video_id     = data.get("video_id", "")
     zutaten      = data.get("zutaten", [])
     zubereitung  = data.get("zubereitung", [])
@@ -334,6 +331,9 @@ def build_html(data: dict) -> str:
   <div id="video" class="panel">
     {yt_link if yt_link else '<p style="color:#6e6e73">Keine Video-ID gefunden.</p>'}
   </div>
+  <p style="text-align:center; padding:10px 0 16px; font-size:11px; color:#aaa;">
+    Foto: <a href="https://www.pexels.com/de-de/foto/hande-messer-aufschneiden-geschnitten-6822591/" target="_blank" style="color:#aaa;">Pexels</a>
+  </p>
 </div>
 
 <script>
@@ -396,29 +396,6 @@ def slugify(title: str) -> str:
     title = re.sub(r'[^\w\s\-äöüÄÖÜß]', '', title)
     return re.sub(r'\s+', '_', title.strip())[:80]
 
-
-def fetch_wikimedia_image(titel: str) -> str:
-    """Sucht ein passendes Bild auf Wikimedia Commons. Gibt URL oder '' zurück."""
-    import urllib.parse
-    query = urllib.parse.quote(titel + " food dish")
-    url = (
-        "https://commons.wikimedia.org/w/api.php"
-        f"?action=query&generator=search&gsrnamespace=6"
-        f"&gsrsearch={query}&prop=imageinfo&iiprop=url"
-        f"&format=json&gsrlimit=8"
-    )
-    try:
-        req = urllib.request.Request(url, headers={"User-Agent": "HasisAIRezepte/1.0"})
-        with urllib.request.urlopen(req, timeout=5) as resp:
-            data = json.loads(resp.read())
-        pages = data.get("query", {}).get("pages", {})
-        for page in pages.values():
-            img_url = page.get("imageinfo", [{}])[0].get("url", "")
-            if img_url and any(img_url.lower().endswith(e) for e in (".jpg", ".jpeg", ".png")):
-                return img_url
-    except Exception:
-        pass
-    return ""
 
 
 def fetch_transcript(video_id: str) -> tuple[str, str]:
