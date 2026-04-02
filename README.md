@@ -11,7 +11,7 @@ Einfach eine YouTube-URL eingeben. Die App lädt das Transkript, schickt es an e
 - **Einkaufsliste** mit Checkboxen zum Abhaken
 - **Personen-Slider** (1–6): alle Mengenangaben passen sich dynamisch an
 - **Zubereitung** mit nummerierten Schritten und ausführlichen Beschreibungen
-- **Nährwerte** pro Portion — Kohlenhydrate pro 100 g und pro Portion hervorgehoben
+- **Nährwerte** pro Portion — Kohlenhydrate pro 100 g
 - **Video-Link** direkt in der App
 - Alle Maßeinheiten metrisch (g, ml, kg, l)
 - Apple-Design — hell, sauber, einfach
