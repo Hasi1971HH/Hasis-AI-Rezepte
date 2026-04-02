@@ -31,9 +31,9 @@ OPTIONS = {
         "webbrowser",
     ],
     "plist": {
-        "CFBundleName": "HasisKocht",
-        "CFBundleDisplayName": "HasisKocht",
-        "CFBundleIdentifier": "de.hasiskocht.native",
+        "CFBundleName": "Hasis AI Rezepte",
+        "CFBundleDisplayName": "Hasis AI Rezepte",
+        "CFBundleIdentifier": "de.hasisairezepte.native",
         "CFBundleVersion": "2.0.0",
         "CFBundleShortVersionString": "2.0",
         "NSHumanReadableCopyright": "Hasis Küche",
@@ -42,7 +42,7 @@ OPTIONS = {
 }
 
 setup(
-    name="HasisKocht",
+    name="Hasis AI Rezepte",
     app=APP,
     options={"py2app": OPTIONS},
     setup_requires=["py2app"],

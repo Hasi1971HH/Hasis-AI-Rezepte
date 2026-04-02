@@ -1,15 +1,15 @@
 #!/bin/bash
 # ─────────────────────────────────────────────────────────────────────────────
-# build_app.sh — Baut HasisKocht als Mac-App + DMG
+# build_app.sh — Baut Hasis AI Rezepte als Mac-App + DMG
 #
 # Voraussetzung: Python 3 + Homebrew (nur einmalig als Entwickler nötig)
 # Aufruf:  bash build_app.sh
 #
-# Ergebnis: dist/HasisKocht.dmg  → direkt weiterschicken oder anbieten
+# Ergebnis: dist/Hasis AI Rezepte.dmg  → direkt weiterschicken oder anbieten
 # ─────────────────────────────────────────────────────────────────────────────
 set -e
 
-APP_NAME="HasisKocht"
+APP_NAME="Hasis AI Rezepte"
 
 echo ""
 echo "🔧  Abhängigkeiten installieren …"

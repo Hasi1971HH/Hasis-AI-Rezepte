@@ -1,4 +1,4 @@
-# 🍳 HasisKocht
+# 🍳 Hasis AI Rezepte
 
 **YouTube-Kochvideo → Interaktives HTML-Rezept — vollautomatisch, per KI.**
 
@@ -34,9 +34,9 @@ Einfach eine YouTube-URL eingeben. Die App lädt das Transkript, schickt es an e
 - Kostenloser [Groq API Key](#-groq-api-key-einrichten) (30 Sekunden)
 
 ### App installieren
-1. **[⬇️ HasisKocht.dmg herunterladen](../../releases/latest)**
+1. **[⬇️ Hasis AI Rezepte.dmg herunterladen](../../releases/latest)**
 2. DMG öffnen
-3. `HasisKocht.app` in den **Programme**-Ordner ziehen
+3. `Hasis AI Rezepte.app` in den **Programme**-Ordner ziehen
 4. App starten → beim ersten Start Groq API Key eingeben → fertig
 
 ---
@@ -49,9 +49,9 @@ Der Key ist kostenlos und dauert 30 Sekunden:
 2. Konto erstellen (kostenlos, keine Kreditkarte nötig)
 3. Links auf **"API Keys"** → **"Create API Key"**
 4. Key kopieren
-5. In HasisKocht: beim ersten Start automatisch abgefragt — oder jederzeit über **⚙** oben rechts ändern
+5. In Hasis AI Rezepte: beim ersten Start automatisch abgefragt — oder jederzeit über **⚙** oben rechts ändern
 
-> Der Key wird ausschließlich lokal auf deinem Mac gespeichert (`~/.hasiskocht_config`).
+> Der Key wird ausschließlich lokal auf deinem Mac gespeichert (`~/.hasisairezepte_config`).
 
 ---
 
@@ -75,7 +75,7 @@ pip install youtube-transcript-api groq
 bash build_app.sh
 ```
 
-Ergebnis: `dist/HasisKocht.dmg` — fertig zum Teilen.
+Ergebnis: `dist/Hasis AI Rezepte.dmg` — fertig zum Teilen.
 
 ### Nur testen (ohne Build)
 ```bash

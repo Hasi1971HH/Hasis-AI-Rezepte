@@ -33,7 +33,7 @@ OPTIONS = {
     "plist": {
         "CFBundleName": "Rezept Transcripts",
         "CFBundleDisplayName": "Rezept Transcripts",
-        "CFBundleIdentifier": "de.hasiskocht.rezept-transcripts",
+        "CFBundleIdentifier": "de.hasisairezepte.rezept-transcripts",
         "CFBundleVersion": "1.0.0",
         "CFBundleShortVersionString": "1.0",
         "NSHumanReadableCopyright": "Hasis Küche",
